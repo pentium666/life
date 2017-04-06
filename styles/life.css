@@ -1,0 +1,13 @@
+.cell {
+	border: solid;
+	width: 30px;
+	height: 30px;
+}
+
+.off {
+	background-color: LightGrey;
+}
+
+.onn {
+	background-color: green;
+}
