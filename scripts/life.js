@@ -8,14 +8,19 @@ function elt(tag, cl) {
 	return el;
 }
 
-function Display(x, y) {
+function Display(game) {
+	this.game = game;
 	this.grid = document.createElement("table");
-	this.width = x;
-	this.height = y;
+	this.width = game.width;
+	this.height = game.height;
 	for(var i = 0; i < y; i++) {
 		var row = document.createElement("tr");
 		for(var j = 0; j < x; j++) {
-			row.appendChild(elt("td", "cell off"));
+			var cell = elt("td", "cell off");
+			cell.addEventListener("mousedown", function() {
+				this.game.toggle(x, y);
+			});
+			row.appendChild(cell);
 		}
 		this.grid.appendChild(row);
 	}
@@ -36,12 +41,23 @@ function Game(x, y) {
 	for(var i = 0; i < y; i++) {
 		var row = [];
 		for(var j = 0; j < x; j++) {
-			row[j] = 0;
+			row[j] = false;
 		}
 		grid.push(row);
 	}
 }
 
-var display = new Display(10, 10);
+game.prototype.toggle = function(x, y) {
+	var state = this.grid[x][y];
+	state = !state;
+	this.grid.[x][y] = state;
+
+}
+
+game.prototype.advance = function () {
+	var next = [];
+};
+
 var game = new Game(10, 10);
+var display = new Display(game);
 document.getElementById("board").appendChild(display.grid);
