@@ -2,12 +2,9 @@
 	border: solid;
 	width: 30px;
 	height: 30px;
-}
-
-.off {
 	background-color: LightGrey;
 }
 
-.onn {
+.on {
 	background-color: green;
 }
