@@ -1,5 +1,3 @@
-console.log("hello there");
-
 function elt(tag, cl) {
 	var el = document.createElement(tag);
 	if(cl) {
@@ -20,7 +18,7 @@ function grid(height, width) {
 	for(var y = 0; y < height; y++) {
 		var row = [];
 		for(var x = 0; x < width; x++) {
-			row.push(0);
+			row.push(false);
 		}
 		arr.push(row);
 	}
@@ -101,7 +99,6 @@ Game.prototype.advance = function () {
 				}
 			}
 			else if(neighbors == 3) {
-				console.log(y, x);
 				cell = true;
 			}
 			next[y][x] = cell;
@@ -119,6 +116,25 @@ var game = new Game(30, 15);
 var display = new Display(game);
 document.getElementById("board").appendChild(display.grid);
 
-function start() {
-	setInterval(game.next, 500);
+function start(x) {
+	var button = document.getElementById("life-start");
+	if(!x) {
+		stop(button);
+		return;
+	}
+	window.interval = setInterval(game.next, 500);
+	button.setAttribute("onclick", "start(0);");
+	button.innerHTML = "Pause";
+}
+
+function stop(button) {
+	clearInterval(window.interval);
+	button.innerHTML = "Start";
+	button.setAttribute("onclick", "start(1);");
+}
+
+function clearBoard() {
+	console.log("board cleared");
+	game.grid = grid(game.height, game.width);
+	display.render(game);
 }
