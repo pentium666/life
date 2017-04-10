@@ -31,8 +31,8 @@ function Display(game) {
 	this.grid = document.createElement("table");
 	this.width = game.width;
 	this.height = game.height;
-	this.topDiv.style.width = (game.width * 30 * 1.5) + 'px';
-	this.topDiv.style.height = (game.height * 30) + 'px';
+	this.grid.style.width = (game.width * 30 * 1.5) + 'px';
+	this.grid.style.height = (game.height * 30) + 'px';
 	for(var y = 0; y < this.height; y++) {
 		var row = document.createElement("tr");
 		for(var x = 0; x < this.width; x++) {
