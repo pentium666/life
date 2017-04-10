@@ -31,7 +31,7 @@ function Display(game) {
 	this.grid = document.createElement("table");
 	this.width = game.width;
 	this.height = game.height;
-	this.topDiv.style.width = (game.width * 30) + 'px';
+	this.topDiv.style.width = (game.width * 30 * 1.5) + 'px';
 	this.topDiv.style.height = (game.height * 30) + 'px';
 	for(var y = 0; y < this.height; y++) {
 		var row = document.createElement("tr");
@@ -117,7 +117,7 @@ Game.prototype.next = function() {
 
 var game = new Game(100, 100);
 var display = new Display(game);
-document.getElementById("board").appendChild(display.grid);
+document.getElementById('board').appendChild(display.topDiv);
 window.speed = 500;
 
 

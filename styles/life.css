@@ -3,6 +3,7 @@ body {
 	margin-right: 0;
 	margin-top: 0;
 	margin-bottom: 0;
+	overflow: scroll;
 }
 
 .cell {
@@ -22,9 +23,8 @@ body {
 	left: 0;
 }
 
-#board {
+.life-board {
 	overflow: hidden;
 	position: absolute;
-	max-width: 100%;
-	max-height: 90%;
+	
 }
