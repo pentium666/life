@@ -27,9 +27,12 @@ function grid(height, width) {
 
 function Display(game) {
 	this.game = game;
+	this.topDiv = elt('div', 'life-board');
 	this.grid = document.createElement("table");
 	this.width = game.width;
 	this.height = game.height;
+	this.topDiv.style.width = (game.width * 30) + 'px';
+	this.topDiv.style.height = (game.height * 30) + 'px';
 	for(var y = 0; y < this.height; y++) {
 		var row = document.createElement("tr");
 		for(var x = 0; x < this.width; x++) {
@@ -42,6 +45,7 @@ function Display(game) {
 		}
 		this.grid.appendChild(row);
 	}
+	this.topDiv.appendChild(this.grid);
 	Array.prototype.slice.call(this.grid);
 }
 
@@ -65,7 +69,6 @@ function Game(x, y) {
 	this.width = x;
 	this.height = y;
 	this.grid = grid(y, x);
-	console.log(this.grid);
 }
 
 //counts neighbors
@@ -112,9 +115,11 @@ Game.prototype.next = function() {
 	display.render(this);
 };
 
-var game = new Game(30, 15);
+var game = new Game(100, 100);
 var display = new Display(game);
 document.getElementById("board").appendChild(display.grid);
+window.speed = 500;
+
 
 function start(x) {
 	var button = document.getElementById("life-start");
@@ -122,7 +127,7 @@ function start(x) {
 		stop(button);
 		return;
 	}
-	window.interval = setInterval(game.next, 500);
+	window.interval = setInterval(game.next, window.s);
 	button.setAttribute("onclick", "start(0);");
 	button.innerHTML = "Pause";
 }
@@ -138,3 +143,15 @@ function clearBoard() {
 	game.grid = grid(game.height, game.width);
 	display.render(game);
 }
+
+var speed = document.getElementById("life-speed");
+speed.addEventListener("change", function() {
+	console.log(speed.value);
+	window.s = 1000 - 10*speed.value;
+	start(0);
+	start(1);
+});
+
+// window.addEventListener('scroll') {
+//
+// }

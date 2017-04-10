@@ -1,3 +1,10 @@
+body {
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
 .cell {
 	border: solid;
 	width: 30px;
@@ -7,4 +14,17 @@
 
 .on {
 	background-color: green;
+}
+
+#controls {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+#board {
+	overflow: hidden;
+	position: absolute;
+	max-width: 100%;
+	max-height: 90%;
 }

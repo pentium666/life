@@ -5,10 +5,12 @@
 	<link rel="stylesheet" href = "styles/life.css">
 </head>
 <body>
-	<div id = "board"></div>
-	<div id = "controls">
-		<button id = "life-start" onclick= "start(1)">Start</button>
-		<button id = "life-clear" onclick= "clearBoard();">Clear</button>
+	<div id="board"></div>
+	<div id="controls">
+		<button id="life-start" onclick="start(1)">Start</button>
+		<button id="life-clear" onclick="clearBoard();">Clear</button>
+		<label for="life-speed">Speed</label>
+		<input type="range" id="life-speed" value="50">
 	</div>
 	<script src="scripts/life.js"></script>
 </body>
