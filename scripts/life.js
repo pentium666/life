@@ -7,6 +7,10 @@ function elt(tag, cl) {
 }
 
 function toggle(x, y) {
+	if(window.notoggle == true) {
+		window.notoggle = false;
+		return;
+	}
 	var state = game.grid[y][x];
 	state = !state;
 	game.grid[y][x] = state;
@@ -31,7 +35,7 @@ function Display(game) {
 	this.grid = document.createElement("table");
 	this.width = game.width;
 	this.height = game.height;
-	this.grid.style.width = (game.width * 30 * 1.5) + 'px';
+	this.grid.style.width = (game.width * 30 * 1.334) + 'px';
 	this.grid.style.height = (game.height * 30) + 'px';
 	for(var y = 0; y < this.height; y++) {
 		var row = document.createElement("tr");
@@ -152,6 +156,35 @@ speed.addEventListener("change", function() {
 	start(1);
 });
 
-// window.addEventListener('scroll') {
-//
-// }
+document.addEventListener("mousemove", function(event) {
+	console.log("move");
+	window.mouseX = event.screenX;
+	window.mouseY = event.screenY;
+});
+
+display.topDiv.addEventListener("mousedown", function(event){
+	window.mousedown = true;
+	console.log("start");
+	var startX = display.topDiv.scrollLeft;
+	var startY = display.topDiv.scrollTop;
+	var mouseStartX = window.mouseX;
+	var mouseStartY = window.mouseY;
+	console.log(window.mouseX);
+	function drag() {
+		console.log(event.clientX);
+		display.topDiv.scrollLeft = startX + (mouseStartX - window.mouseX);
+		display.topDiv.scrollTop = startY + (mouseStartY - window.mouseY);
+		if(Math.abs(mouseStartX - window.mouseX) > 10 || Math.abs(mouseStartY - window.mouseY) > 10) {
+			window.notoggle = true;
+		}
+		if(window.mousedown) {
+			requestAnimationFrame(drag);
+		}
+	}
+	requestAnimationFrame(drag);
+	event.preventDefault();
+});
+
+document.addEventListener("mouseup", function() {
+	window.mousedown = false;
+});
