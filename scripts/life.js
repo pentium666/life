@@ -35,7 +35,7 @@ function Display(game) {
 	this.grid = document.createElement("table");
 	this.width = game.width;
 	this.height = game.height;
-	this.grid.style.width = (game.width * 30 * 1.334) + 'px';
+	this.grid.style.width = (game.width * 30 * 1.15384615385) + 'px';
 	this.grid.style.height = (game.height * 30) + 'px';
 	for(var y = 0; y < this.height; y++) {
 		var row = document.createElement("tr");
@@ -119,7 +119,7 @@ Game.prototype.next = function() {
 	display.render(this);
 };
 
-var game = new Game(100, 100);
+var game = new Game(200, 200);
 var display = new Display(game);
 document.getElementById('board').appendChild(display.topDiv);
 window.speed = 500;
@@ -188,3 +188,13 @@ display.topDiv.addEventListener("mousedown", function(event){
 document.addEventListener("mouseup", function() {
 	window.mousedown = false;
 });
+
+window.zoom = 1;
+window.addEventListener("wheel", function(event) {
+	function zoom() {
+		window.zoom = Math.max(window.zoom + event.deltaY*.005, .4);
+		display.topDiv.style.zoom = window.zoom;
+	}
+	requestAnimationFrame(zoom);
+	event.preventDefault();
+})

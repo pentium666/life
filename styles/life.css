@@ -7,7 +7,7 @@ body {
 }
 
 .cell {
-	border: solid;
+	border: none;
 	width: 30px;
 	height: 30px;
 	background-color: LightGrey;
