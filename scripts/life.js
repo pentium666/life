@@ -132,7 +132,7 @@ display.topDiv.scrollLeft = 1000;
 display.topDiv.scrollTop = 1000;
 window.zoom = .535;
 display.topDiv.style.zoom = ".535";
-window.speed = 500;
+window.s = 1000 - 10*document.getElementById("life-speed").value;
 
 
 function start(x) {
