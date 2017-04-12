@@ -17,12 +17,18 @@ function toggle(x, y) {
 	display.set(y, x, state);
 }
 
-function grid(height, width) {
+function grid(height, width, random) {
 	var arr = [];
 	for(var y = 0; y < height; y++) {
 		var row = [];
 		for(var x = 0; x < width; x++) {
-			row.push(false);
+			if(random) {
+				console.log("random");
+				row.push(Math.random() < .5);
+			}
+			else {
+				row.push(false);
+			}
 		}
 		arr.push(row);
 	}
@@ -122,6 +128,10 @@ Game.prototype.next = function() {
 var game = new Game(200, 200);
 var display = new Display(game);
 document.getElementById('board').appendChild(display.topDiv);
+display.topDiv.scrollLeft = 1000;
+display.topDiv.scrollTop = 1000;
+window.zoom = .535;
+display.topDiv.style.zoom = ".535";
 window.speed = 500;
 
 
@@ -148,6 +158,13 @@ function clearBoard() {
 	display.render(game);
 }
 
+function randBoard() {
+	console.log("board randomized");
+	game.grid = grid(game.height, game.width, true);
+	console.log(game.grid);
+	display.render(game);
+}
+
 var speed = document.getElementById("life-speed");
 speed.addEventListener("change", function() {
 	console.log(speed.value);
@@ -157,7 +174,6 @@ speed.addEventListener("change", function() {
 });
 
 document.addEventListener("mousemove", function(event) {
-	console.log("move");
 	window.mouseX = event.screenX;
 	window.mouseY = event.screenY;
 });
@@ -169,9 +185,7 @@ display.topDiv.addEventListener("mousedown", function(event){
 	var startY = display.topDiv.scrollTop;
 	var mouseStartX = window.mouseX;
 	var mouseStartY = window.mouseY;
-	console.log(window.mouseX);
 	function drag() {
-		console.log(event.clientX);
 		display.topDiv.scrollLeft = startX + (mouseStartX - window.mouseX);
 		display.topDiv.scrollTop = startY + (mouseStartY - window.mouseY);
 		if(Math.abs(mouseStartX - window.mouseX) > 10 || Math.abs(mouseStartY - window.mouseY) > 10) {
@@ -189,6 +203,7 @@ document.addEventListener("mouseup", function() {
 	window.mousedown = false;
 });
 
+//zoom
 window.zoom = 1;
 window.addEventListener("wheel", function(event) {
 	function zoom() {
